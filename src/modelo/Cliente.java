@@ -16,7 +16,7 @@ public class Cliente {
     }
 
     public boolean sacar(double valor) {
-        if (valor > 0 && this.saldo > valor) {
+        if (valor > 0 && this.saldo >= valor) {
             this.saldo -= valor;
             return true;
         }
@@ -26,6 +26,15 @@ public class Cliente {
     public boolean depositar(double valor) {
         if (valor > 0) {
             this.saldo += valor;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean transferir(Cliente destino, double valor) {
+        if (valor > 0 && valor <= this.saldo) {
+            this.saldo -= valor;
+            destino.depositar(valor);
             return true;
         }
         return false;
@@ -70,20 +79,15 @@ public class Cliente {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+    
+    public double getSaldoTotal() {
+        return saldo;
+    }
 
     @Override
     public String toString() {
         return "Cliente{" + "id=" + id + ", nome=" + nome + ", saldo=" + saldo + '}';
     }
-    public boolean Transferencia(double valor) {
-        if (valor > 0 && this.saldo >= valor) {
-            this.saldo -= valor;
-    
-            return true;
-        }
-        return false;
-    }
-    
     
    
 }
